@@ -1,0 +1,12 @@
+[libs]
+./node_modules/fbjs/flow/lib
+
+[options]
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+
+module.name_mapper='^\(.*\)\.css$' -> 'config/flow/css'
+module.name_mapper='^\(.*\)\.\(jpg\|png\|gif\|eot\|svg\|ttf\|woff\|woff2\|mp4\|webm\)$' -> 'config/flow/file'
+
+suppress_type=$FlowIssue
+suppress_type=$FlowFixMe

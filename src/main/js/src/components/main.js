@@ -1,5 +1,6 @@
+/* @flow */
+
 import React, {Component} from 'react';
-import './main.css';
 
 // http://v4-alpha.getbootstrap.com/
 export default class Main extends Component {

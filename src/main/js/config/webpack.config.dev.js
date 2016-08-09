@@ -40,6 +40,7 @@ module.exports = {
   },
   module: {
     preLoaders: [
+      {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
       {
         test: /\.js$/,
         loader: 'eslint',
