@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import Main from './components/main';
 import './index.css';
 
-// https://github.com/webpack/expose-loader
-// import 'expose?jQuery!jquery';
-// import 'expose?Tether!tether';
-import 'expose?init!./api-init';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
-// import 'bootstrap/dist/js/bootstrap';
-// import 'bootstrap/dist/css/bootstrap.css';
+// https://github.com/webpack/expose-loader
+import 'expose?init!./api-init';
 
 ReactDOM.render(
   <Main />,

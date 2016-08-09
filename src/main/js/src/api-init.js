@@ -1,12 +1,12 @@
 /* global gapi */
 
 const apiRoot = '//' + window.location.host + '/_ah/api';
+// let appLoaded = false;
+// let oauthLoaded = false;
 
 function initialize(apiRoot) {
-    let appLoaded = false;
-    let oauthLoaded = false;
     const callbackApp = () => {
-        appLoaded = true;
+        // appLoaded = true;
         console.log("App API initialized");
         // google.devrel.samples.hello.enableButtons();
         // google.devrel.samples.hello.signin(true,
@@ -22,7 +22,7 @@ function initialize(apiRoot) {
             });
     };
     const callbackOauth = () => {
-        oauthLoaded = true;
+        // oauthLoaded = true;
         console.log("Oauth initialized");
     };
 
