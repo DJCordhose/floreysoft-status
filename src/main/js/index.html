@@ -3,17 +3,36 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="933874018426-irk32kd7hstnhbpb3rbe8kahc8mn236h.apps.googleusercontent.com">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500' rel='stylesheet' type='text/css'>
     <title>floreysoft status</title>
   </head>
   <body>
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <div id="root"></div>
+    <a href="#" onclick="signOut();">Sign out</a>
   </body>
   <script>
+    function onSignIn(googleUser) {
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail());
+    }
+
+    function signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
+
     function apiLoaded() {
       console.log("Generic Google Client APIs loaded");
       init.init();
     }
   </script>
-  <script src="https://apis.google.com/js/client.js?onload=apiLoaded"></script>
+  <script src="https://apis.google.com/js/client.js?onload=apiLoaded" async defer></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 </html>

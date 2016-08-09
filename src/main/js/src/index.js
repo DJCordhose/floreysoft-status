@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Main from './components/main';
+import App from './components/App';
 import './index.css';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -11,9 +11,4 @@ injectTapEventPlugin();
 // https://github.com/webpack/expose-loader
 import 'expose?init!./api-init';
 
-ReactDOM.render(
-  <Main />,
-    document.getElementById('root')
-
-// $('#root')[0]
-);
+ReactDOM.render(<App />, document.getElementById('root'));
