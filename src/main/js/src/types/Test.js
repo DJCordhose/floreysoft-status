@@ -7,4 +7,5 @@ export type Test = {
     url: string;
     interval: number;
     disabled?: boolean;
+    selected?: boolean;
 };

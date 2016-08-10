@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, {Component} from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
@@ -29,7 +28,7 @@ class TestDialog extends Component<any, Props, Test> {
     render() {
         const {open, onSaved, onCanceled} = this.props;
         const test = this.state;
-        const {id, name, description, url, interval} = test;
+        const {name, description, url, interval} = test;
 
         const standardActions = <div>
             <FlatButton
@@ -46,7 +45,7 @@ class TestDialog extends Component<any, Props, Test> {
 
         return <Dialog
             open={open}
-            title="Sekrete"
+            title="Test"
             actions={standardActions}
             onRequestClose={onCanceled}
         >
@@ -63,6 +62,20 @@ class TestDialog extends Component<any, Props, Test> {
                 onChange={(e) => this.setState({url: e.target.value})}
                 onKeyDown={(e: KeyboardEvent)=> e.keyCode === 13 && onSaved(test)}
                 value={url}
+            />
+            <TextField
+                hintText="Enter Description"
+                floatingLabelText="Description"
+                onChange={(e) => this.setState({description: e.target.value})}
+                onKeyDown={(e: KeyboardEvent)=> e.keyCode === 13 && onSaved(test)}
+                value={description}
+            />
+            <TextField
+                hintText="Enter Interval"
+                floatingLabelText="Interval"
+                onChange={(e) => this.setState({interval: e.target.value})}
+                onKeyDown={(e: KeyboardEvent)=> e.keyCode === 13 && onSaved(test)}
+                value={interval}
             />
         </Dialog>;
     }

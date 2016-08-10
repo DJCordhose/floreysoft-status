@@ -2,9 +2,6 @@
 
 import React, {Component} from 'react';
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {deepOrange500} from 'material-ui/styles/colors';
 import Overview from './Overview';
 import AppBar from './AppBar';
 import TestDialog from './TestDialog';
@@ -13,12 +10,7 @@ import {List} from 'immutable';
 
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
-
-const muiTheme = getMuiTheme({
-    palette: {
-        accent1Color: deepOrange500,
-    },
-});
+import type {Selection} from '../types/ui';
 
 const styles = {
     container: {
@@ -26,6 +18,7 @@ const styles = {
         // paddingTop: 200,
     },
 };
+
 
 type State = {
     tests: List<Test>;
@@ -50,12 +43,13 @@ class App extends Component<any, any, State> {
             name: 'Test2',
             interval: 5,
             description: 'Noch ein Test 2',
-            url: 'url2'
+            url: 'url2',
+            disabled: true
         };
         this.state = {
             tests: List.of(test1, test2),
             dialogOpen: false,
-            currentTest: test1
+            currentTest: test1,
         }
     }
 
@@ -81,10 +75,9 @@ class App extends Component<any, any, State> {
         if (storedTestEntry) {
             const key = storedTestEntry[0];
             this.setState({
-                tests: this.state.tests.delete(key).push(test)
+                tests: this.state.tests.delete(key).push(test).sort((t1: Test, t2: Test) => t1.id - t2.id)
             });
         }
-        this.closeDialog();
     }
 
     closeDialog() {
@@ -93,20 +86,60 @@ class App extends Component<any, any, State> {
         });
     }
 
+    executeAction(action: string) {
+        const {tests} = this.state;
+        if (action === 'edit') {
+            const firstSelectedTest = tests.find(test => test.selected);
+            if (firstSelectedTest) {
+                this.openTest(firstSelectedTest.id);
+            }
+        } else {
+            console.error(`Should execute ${action}`);
+        }
+    }
+
+    setSelection(selection: Selection) {
+        const {tests} = this.state;
+        tests.forEach((test: Test) => {
+            test.selected = false;
+            return true;
+        });
+        if (selection instanceof Array) {
+            selection.forEach((index) => {
+                tests.get(index).selected = true;
+            })
+        } else if (selection === "All") {
+            tests.forEach((test: Test) => {
+                test.selected = true;
+                return true;
+            });
+        }
+        this.setState({
+            tests
+        });
+    }
+
     render() {
         const {tests, dialogOpen, currentTest} = this.state;
-        return <MuiThemeProvider muiTheme={muiTheme}>
-            <div style={styles.container}>
-                <AppBar />
-                <Overview tests={tests} onOpen={(test: Test) => this.openTest(test.id)}/>
+        return <div style={styles.container}>
+                <AppBar
+                    onAction={(action: string) => this.executeAction(action)}
+                />
+                <Overview
+                    tests={tests}
+                    onSelect={(selection: Selection) => this.setSelection(selection)}
+                    onSave={(test: Test) => this.saveTest(test)}
+                />
                 <TestDialog
                     open={dialogOpen}
                     test={currentTest}
-                    onSaved={(test: Test) => this.saveTest(test)}
+                    onSaved={(test: Test) => {
+                        this.saveTest(test);
+                        this.closeDialog();
+                    }}
                     onCanceled={() => this.closeDialog()}
                 />
-            </div>
-        </MuiThemeProvider>
+            </div>;
     }
 }
 
