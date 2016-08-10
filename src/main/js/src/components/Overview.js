@@ -8,14 +8,15 @@ import {List as MaterialList, ListItem} from 'material-ui/List';
 
 type Props = {
     tests: List<Test>;
+    onOpen(test: Test): void;
 };
 
 class Overview extends Component<any, Props, void> {
     render() {
-        const {tests} = this.props;
+        const {tests, onOpen} = this.props;
         return (
             <MaterialList>
-                {tests.map(test => <TestEntry {...test}/> )}
+                {tests.map(test => <TestEntry key={test.id} onOpen={onOpen} test={test}/>)}
             </MaterialList>
         );
     }
