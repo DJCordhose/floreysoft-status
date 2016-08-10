@@ -63,9 +63,10 @@ class App extends Component<any, any, State> {
         const testEntry = this.findTestEntryForId(id);
         if (testEntry) {
             const test = testEntry[1];
+            const testCopy = Object.assign({}, test);
             this.setState({
                 dialogOpen: true,
-                currentTest: test
+                currentTest: testCopy
             });
         }
     }

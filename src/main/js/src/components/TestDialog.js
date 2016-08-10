@@ -22,6 +22,10 @@ class TestDialog extends Component<any, Props, Test> {
         this.state = props.test;
     }
 
+    componentWillReceiveProps(props: Props) {
+        this.state = props.test;
+    }
+
     render() {
         const {open, onSaved, onCanceled} = this.props;
         const test = this.state;
