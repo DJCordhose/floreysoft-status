@@ -8,6 +8,8 @@ import TestDialog from './TestDialog';
 
 import {List} from 'immutable';
 
+import {load} from '../actions/actions';
+
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
 import type {Selection} from '../types/ui';
@@ -51,6 +53,15 @@ class App extends Component<any, any, State> {
             dialogOpen: false,
             currentTest: test1,
         }
+    }
+
+    componentDidMount() {
+        load().then(statusList => {
+            this.setState({
+                tests: List(statusList) // eslint-disable-line new-cap
+            });
+
+        })
     }
 
     openTest(id: number) {
@@ -108,7 +119,7 @@ class App extends Component<any, any, State> {
             selection.forEach((index) => {
                 tests.get(index).selected = true;
             })
-        } else if (selection === "All") {
+        } else if (selection === "all") {
             tests.forEach((test: Test) => {
                 test.selected = true;
                 return true;
@@ -122,24 +133,24 @@ class App extends Component<any, any, State> {
     render() {
         const {tests, dialogOpen, currentTest} = this.state;
         return <div style={styles.container}>
-                <AppBar
-                    onAction={(action: string) => this.executeAction(action)}
-                />
-                <Overview
-                    tests={tests}
-                    onSelect={(selection: Selection) => this.setSelection(selection)}
-                    onSave={(test: Test) => this.saveTest(test)}
-                />
-                <TestDialog
-                    open={dialogOpen}
-                    test={currentTest}
-                    onSaved={(test: Test) => {
+            <AppBar
+                onAction={(action: string) => this.executeAction(action)}
+            />
+            <Overview
+                tests={tests}
+                onSelect={(selection: Selection) => this.setSelection(selection)}
+                onSave={(test: Test) => this.saveTest(test)}
+            />
+            <TestDialog
+                open={dialogOpen}
+                test={currentTest}
+                onSaved={(test: Test) => {
                         this.saveTest(test);
                         this.closeDialog();
                     }}
-                    onCanceled={() => this.closeDialog()}
-                />
-            </div>;
+                onCanceled={() => this.closeDialog()}
+            />
+        </div>;
     }
 }
 
