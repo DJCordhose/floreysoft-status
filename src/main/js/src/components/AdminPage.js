@@ -8,7 +8,7 @@ import TestDialog from './TestDialog';
 
 import {List} from 'immutable';
 
-import {loadTests, saveTest} from '../actions/actions';
+import {loadTests, saveTest, signIn} from '../actions/actions';
 
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
@@ -100,7 +100,9 @@ class App extends Component<any, any, State> {
 
     executeAction(action: string) {
         const {tests} = this.state;
-        if (action === 'edit') {
+        if (action === 'login') {
+            signIn(false).then(() => console.log('signed in')).catch(()=>console.log('login failed'))
+        } else if (action === 'edit') {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
                 this.openTest(firstSelectedTest.id);

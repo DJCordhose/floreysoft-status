@@ -26,7 +26,8 @@ class MyAppBar extends Component<void, Props, void> {
                 anchorOrigin={{horizontal: 'right', vertical: 'top'}}
             >
                 <MenuItem primaryText="Refresh" onClick={() => onAction('refresh')}/>
-                <MenuItem primaryText="Sign out"  onClick={() => onAction('sign-out')}/>
+                <MenuItem primaryText="Sign in" onClick={() => onAction('login')}/>
+                <MenuItem primaryText="Sign out" onClick={() => onAction('logout')}/>
             </IconMenu>
         </div>;
 
