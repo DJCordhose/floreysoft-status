@@ -56,7 +56,7 @@ class App extends Component<any, any, State> {
     }
 
     componentDidMount() {
-        load().then(statusList => {
+        load().then((statusList: Array<Test>) => {
             this.setState({
                 tests: List(statusList) // eslint-disable-line new-cap
             });

@@ -6,6 +6,7 @@ import com.google.api.server.spi.response.NotFoundException;
 import com.google.appengine.api.users.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Named;
 
@@ -18,10 +19,13 @@ import javax.inject.Named;
 public class Greetings {
 
   public static ArrayList<HelloGreeting> greetings = new ArrayList<HelloGreeting>();
+  public static List<Test> tests = new ArrayList<Test>();
 
   static {
     greetings.add(new HelloGreeting("hello world!"));
     greetings.add(new HelloGreeting("goodbye world!"));
+    tests.add(new Test(1, "Test1", "Ein Test", "url1", 5 , false));
+    tests.add(new Test(2, "Test2", "Noch ein Test", "url2", 10 , true));
   }
 
   public HelloGreeting getGreeting(@Named("id") Integer id) throws NotFoundException {
@@ -30,6 +34,10 @@ public class Greetings {
     } catch (IndexOutOfBoundsException e) {
       throw new NotFoundException("Greeting not found with an index: " + id);
     }
+  }
+
+  public List<Test> listTests() {
+    return tests;
   }
 
   public ArrayList<HelloGreeting> listGreeting() {
