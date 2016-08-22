@@ -8,7 +8,7 @@ import TestDialog from './TestDialog';
 
 import {List} from 'immutable';
 
-import {loadTests} from '../actions/actions';
+import {loadTests, saveTest} from '../actions/actions';
 
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
@@ -88,6 +88,7 @@ class App extends Component<any, any, State> {
             this.setState({
                 tests: this.state.tests.delete(key).push(test).sort((t1: Test, t2: Test) => t1.id - t2.id)
             });
+            saveTest(test);
         }
     }
 

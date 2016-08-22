@@ -8,7 +8,7 @@ declare var gapi;
 
 export function loadTests(): Promise<Array<Test>> {
     const promise = new Promise(resolve => {
-        gapi.client.status.greetings.listTests().execute(resp => {
+        gapi.client.status.tests.listTests().execute(resp => {
             if (!resp.code) {
                 resp.items = resp.items || [];
                 resolve(resp.items);
@@ -18,9 +18,20 @@ export function loadTests(): Promise<Array<Test>> {
     return promise;
 }
 
+export function saveTest(test: Test): Promise<Test> {
+    const promise = new Promise(resolve => {
+        gapi.client.status.test.save().execute(resp => {
+            if (!resp.code) {
+                resolve(resp);
+            }
+        });
+    });
+    return promise;
+}
+
 export function loadReports(): Promise<Array<Report>> {
     const promise = new Promise(resolve => {
-        gapi.client.status.greetings.listCurrentReports().execute(resp => {
+        gapi.client.status.tests.listCurrentReports().execute(resp => {
             if (!resp.code) {
                 resp.items = resp.items || [];
                 resolve(resp.items);
