@@ -12,12 +12,12 @@ const muiTheme = getMuiTheme({
     },
 });
 
-import App from './components/App';
+import AdminPage from './components/AdminPage';
 
 export default function() {
     ReactDOM.render(
         <MuiThemeProvider muiTheme={muiTheme}>
-            <App />
+            <AdminPage />
         </MuiThemeProvider>
         , document.getElementById('root'));
 }
