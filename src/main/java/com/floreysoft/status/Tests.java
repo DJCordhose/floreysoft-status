@@ -39,7 +39,7 @@ public class Tests {
         throw new NotFoundException("Test not found with id: " + id);
     }
 
-    public List<Test> listTests(User user) {
+    public List<Test> listTests() {
         return mockTests;
     }
 
@@ -58,7 +58,9 @@ public class Tests {
         if (user == null) {
             throw new UnauthorizedException("Method needs authenticated user");
         }
-        if (!user.getEmail().startsWith("oliver.zeigermann")) {
+        if (!user.getEmail().equals("oliver.zeigermann@floreysoft.net")
+                && !user.getEmail().equals("daniel.florey@floreysoft.net")
+                && !user.getEmail().equals("example@example.com")) {
             throw new UnauthorizedException("You do not have admin permissions");
         }
     }
@@ -66,16 +68,16 @@ public class Tests {
     @ApiMethod(name = "test.save", httpMethod = "put")
     public Test saveTest(User user, Test test) throws UnauthorizedException {
         checkUser(user);
-        this.deleteTest(user, test);
+        this.deleteTest(user, test.id);
         return this.addTest(user, test);
     }
 
     @ApiMethod(name = "test.delete", httpMethod = "delete")
-    public Test deleteTest(User user, Test testToBeDeleted) throws UnauthorizedException {
+    public Test deleteTest(User user, @Named("id") Integer id) throws UnauthorizedException {
         checkUser(user);
         int index = 0;
         for (Test test : mockTests) {
-            if (test.id == testToBeDeleted.id) {
+            if (test.id == id) {
                 mockTests.remove(index);
                 return test;
             }

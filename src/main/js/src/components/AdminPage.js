@@ -8,7 +8,7 @@ import TestDialog from './TestDialog';
 
 import {List} from 'immutable';
 
-import {loadTests, saveTest, signIn} from '../actions/actions';
+import {loadTests, saveTest, deleteTest, signIn} from '../actions/actions';
 
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
@@ -56,9 +56,13 @@ class App extends Component<any, any, State> {
     }
 
     componentDidMount() {
+        this.loadTests();
+    }
+
+    loadTests() {
         loadTests().then((statusList: Array<Test>) => {
             this.setState({
-                tests: List(statusList) // eslint-disable-line new-cap
+                tests: List(statusList).sort((t1: Test, t2: Test) => t1.id - t2.id) // eslint-disable-line new-cap
             });
 
         })
@@ -82,14 +86,11 @@ class App extends Component<any, any, State> {
     }
 
     saveTest(test: Test) {
-        const storedTestEntry = this.findTestEntryForId(test.id);
-        if (storedTestEntry) {
-            const key = storedTestEntry[0];
-            this.setState({
-                tests: this.state.tests.delete(key).push(test).sort((t1: Test, t2: Test) => t1.id - t2.id)
-            });
-            saveTest(test);
-        }
+        saveTest(test).then(() => this.loadTests());
+    }
+
+    deleteTest(test: Test) {
+        deleteTest(test).then(() => this.loadTests());
     }
 
     closeDialog() {
@@ -106,6 +107,11 @@ class App extends Component<any, any, State> {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
                 this.openTest(firstSelectedTest.id);
+            }
+        } else if (action === 'delete') {
+            const firstSelectedTest = tests.find(test => test.selected);
+            if (firstSelectedTest) {
+                this.deleteTest(firstSelectedTest);
             }
         } else {
             console.error(`Should execute ${action}`);

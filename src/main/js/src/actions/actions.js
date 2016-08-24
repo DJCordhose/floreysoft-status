@@ -6,7 +6,7 @@ import type {Report} from '../types/Report';
 
 declare var gapi;
 
-const CLIENT_ID = '933874018426-irk32kd7hstnhbpb3rbe8kahc8mn236h.apps.googleusercontent.com';
+const CLIENT_ID = '113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/userinfo.email';
 
 export let signedIn = false;
@@ -25,7 +25,20 @@ export function loadTests(): Promise<Array<Test>> {
 
 export function saveTest(test: Test): Promise<Test> {
     const promise = new Promise(resolve => {
-        gapi.client.status.test.save().execute(resp => {
+        gapi.client.status.test.save(test).execute(resp => {
+            if (!resp.code) {
+                resolve(resp);
+            }
+        });
+    });
+    return promise;
+}
+
+export function deleteTest(test: Test): Promise<Test> {
+    const promise = new Promise(resolve => {
+        gapi.client.status.test.delete({
+            id: test.id
+        }).execute(resp => {
             if (!resp.code) {
                 resolve(resp);
             }
