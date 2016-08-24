@@ -2,7 +2,7 @@
 
 import React, {Component} from 'react';
 
-import Overview from './Overview';
+import Overview from './AdminOverview';
 import AppBar from './AppBar';
 import TestDialog from './TestDialog';
 
@@ -25,7 +25,7 @@ const styles = {
 type State = {
     tests: List<Test>;
     dialogOpen: boolean;
-    currentTest: Test;
+    currentTest: ?Test;
 }
 
 class AdminPage extends Component<any, any, State> {
@@ -60,9 +60,9 @@ class AdminPage extends Component<any, any, State> {
     }
 
     loadTests() {
-        loadTests().then((statusList: Array<Test>) => {
+        loadTests().then((tests: Array<Test>) => {
             this.setState({
-                tests: List(statusList).sort((t1: Test, t2: Test) => t1.id - t2.id) // eslint-disable-line new-cap
+                tests: List(tests).sort((t1: Test, t2: Test) => t1.id - t2.id) // eslint-disable-line new-cap
             });
 
         })

@@ -3,21 +3,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {deepOrange500} from 'material-ui/styles/colors';
-const muiTheme = getMuiTheme({
-    palette: {
-        accent1Color: deepOrange500,
-    },
-});
+import {Router, Route, IndexRoute, useRouterHistory } from 'react-router';
 
+// https://github.com/reactjs/react-router/blob/master/upgrade-guides/v2.0.0.md#using-custom-histories
+import { createHashHistory } from 'history';
+const history = useRouterHistory(createHashHistory)({ queryKey: false });
+
+import App from './components/App';
 import AdminPage from './components/AdminPage';
+import OverviewPage from './components/OverviewPage';
 
-export default function() {
+export default function () {
     ReactDOM.render(
-        <MuiThemeProvider muiTheme={muiTheme}>
-            <AdminPage />
-        </MuiThemeProvider>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={OverviewPage}/>
+                <Route path="admin" component={AdminPage} />
+            </Route>
+        </Router>
         , document.getElementById('root'));
 }

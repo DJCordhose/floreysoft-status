@@ -22,7 +22,7 @@ type Props = {
     onSelect(selection: Selection): void;
 };
 
-class Overview extends Component<any, Props, void> {
+class AdminOverview extends Component<any, Props, void> {
     fuckTheNextSelection: boolean;
     render() {
         const {tests, onSave, onSelect} = this.props;
@@ -98,4 +98,4 @@ class Overview extends Component<any, Props, void> {
     }
 }
 
-export default Overview;
+export default AdminOverview;

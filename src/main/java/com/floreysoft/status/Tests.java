@@ -25,9 +25,9 @@ public class Tests {
     static {
         mockTests.add(new Test(1, "Test1", "Ein Test", "url1", 5, false));
         mockTests.add(new Test(2, "Test2", "Noch ein Test", "url2", 10, true));
-        mockReports.add(new Report("Test1", "Ein Test", new Date().getTime(), Status.OK));
-        mockReports.add(new Report("Test2", "Zweiter Test", new Date().getTime(), Status.SLOW));
-        mockReports.add(new Report("Test3", "Dritter Test", new Date().getTime(), Status.FAIL));
+        mockReports.add(new Report(1, "Test1", "Ein Test", new Date().getTime(), Status.OK));
+        mockReports.add(new Report(2, "Test2", "Zweiter Test", new Date().getTime(), Status.SLOW));
+        mockReports.add(new Report(3, "Test3", "Dritter Test", new Date().getTime(), Status.FAIL));
     }
 
     public Test getTest(@Named("id") Integer id) throws NotFoundException {
