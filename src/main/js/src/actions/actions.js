@@ -59,6 +59,7 @@ export function loadReports(): Promise<Array<Report>> {
     return promise;
 }
 
+// https://developers.google.com/api-client-library/javascript/reference/referencedocs#auth-deprecated
 export function signIn(mode: boolean = true): Promise<void> {
     const promise = new Promise((resolve, reject) => {
         gapi.auth.authorize({

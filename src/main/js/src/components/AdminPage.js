@@ -28,7 +28,7 @@ type State = {
     currentTest: Test;
 }
 
-class App extends Component<any, any, State> {
+class AdminPage extends Component<any, any, State> {
     state: State;
 
     constructor(props: any) {
@@ -102,7 +102,7 @@ class App extends Component<any, any, State> {
     executeAction(action: string) {
         const {tests} = this.state;
         if (action === 'login') {
-            signIn(false).then(() => console.log('signed in')).catch(()=>console.log('login failed'))
+            signIn(false).then(() => console.log('logged in')).catch(()=>console.warn('login failed'))
         } else if (action === 'edit') {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
@@ -113,6 +113,8 @@ class App extends Component<any, any, State> {
             if (firstSelectedTest) {
                 this.deleteTest(firstSelectedTest);
             }
+        } else if (action === 'refresh') {
+            this.loadTests();
         } else {
             console.error(`Should execute ${action}`);
         }
@@ -163,4 +165,4 @@ class App extends Component<any, any, State> {
     }
 }
 
-export default App;
+export default AdminPage;

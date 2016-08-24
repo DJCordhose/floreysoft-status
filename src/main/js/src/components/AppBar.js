@@ -27,7 +27,6 @@ class MyAppBar extends Component<void, Props, void> {
             >
                 <MenuItem primaryText="Refresh" onClick={() => onAction('refresh')}/>
                 <MenuItem primaryText="Sign in" onClick={() => onAction('login')}/>
-                <MenuItem primaryText="Sign out" onClick={() => onAction('logout')}/>
             </IconMenu>
         </div>;
 
