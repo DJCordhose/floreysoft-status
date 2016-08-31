@@ -48,9 +48,9 @@ class AdminOverview extends Component<any, Props, void> {
                     }}
                 >
                     <TableHeader
-                        displaySelectAll={true}
+                        displaySelectAll={false}
                         adjustForCheckbox={true}
-                        enableSelectAll={true}
+                        enableSelectAll={false}
                     >
                         <TableRow>
                             <TableHeaderColumn colSpan="5" tooltip="All configured Tests" style={{textAlign: 'center'}}>

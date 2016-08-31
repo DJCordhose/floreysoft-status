@@ -8,7 +8,7 @@ import TestDialog from './TestDialog';
 
 import {List} from 'immutable';
 
-import {loadTests, saveTest, deleteTest, signIn} from '../actions/actions';
+import {loadTests, saveTest, addTest, deleteTest, navigateToRoot, signIn} from '../actions/actions';
 
 // https://flowtype.org/blog/2015/02/18/Import-Types.html
 import type {Test} from '../types/Test';
@@ -68,7 +68,7 @@ class AdminPage extends Component<any, any, State> {
         })
     }
 
-    openTest(id: number) {
+    openTestById(id: number) {
         const testEntry = this.findTestEntryForId(id);
         if (testEntry) {
             const test = testEntry[1];
@@ -80,13 +80,31 @@ class AdminPage extends Component<any, any, State> {
         }
     }
 
+    openNewTest() {
+        const test: Test = {
+            id: -1,
+            name: '',
+            interval: -1,
+            description: '',
+            url: ''
+        };
+        this.setState({
+            dialogOpen: true,
+            currentTest: test
+        });
+    }
+
     findTestEntryForId(id: number): ?[number, Test] {
         // https://facebook.github.io/immutable-js/docs/#/List/findEntry
         return this.state.tests.findEntry(test => test.id === id);
     }
 
     saveTest(test: Test) {
-        saveTest(test).then(() => this.loadTests());
+        if (test.id !== -1) {
+            saveTest(test).then(() => this.loadTests());
+        } else {
+            addTest(test).then(() => this.loadTests());
+        }
     }
 
     deleteTest(test: Test) {
@@ -106,8 +124,10 @@ class AdminPage extends Component<any, any, State> {
         } else if (action === 'edit') {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
-                this.openTest(firstSelectedTest.id);
+                this.openTestById(firstSelectedTest.id);
             }
+        } else if (action === 'add') {
+                this.openNewTest();
         } else if (action === 'delete') {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
@@ -115,6 +135,8 @@ class AdminPage extends Component<any, any, State> {
             }
         } else if (action === 'refresh') {
             this.loadTests();
+        } else if (action === 'to report') {
+            navigateToRoot();
         } else {
             console.error(`Should execute ${action}`);
         }

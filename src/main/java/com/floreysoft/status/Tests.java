@@ -21,6 +21,7 @@ import javax.inject.Named;
 public class Tests {
     public static List<Test> mockTests = new ArrayList<Test>();
     public static List<Report> mockReports = new ArrayList<Report>();
+    public static int latestTestId = 2;
 
     static {
         mockTests.add(new Test(1, "Test1", "Ein Test", "url1", 5, false));
@@ -50,6 +51,9 @@ public class Tests {
     @ApiMethod(name = "test.add", httpMethod = "post")
     public Test addTest(User user, Test test) throws UnauthorizedException {
         checkUser(user);
+        if (test.id == -1) {
+            test.id = ++latestTestId;
+        }
         mockTests.add(test);
         return test;
     }

@@ -11,6 +11,13 @@ const SCOPES = 'https://www.googleapis.com/auth/userinfo.email';
 
 export let signedIn = false;
 
+import history from '../app-history';
+
+export function navigateToRoot() {
+    const root = '/';
+    history.push(root);
+}
+
 export function loadTests(): Promise<Array<Test>> {
     const promise = new Promise(resolve => {
         gapi.client.status.tests.listTests().execute(resp => {
@@ -26,6 +33,17 @@ export function loadTests(): Promise<Array<Test>> {
 export function saveTest(test: Test): Promise<Test> {
     const promise = new Promise(resolve => {
         gapi.client.status.test.save(test).execute(resp => {
+            if (!resp.code) {
+                resolve(resp);
+            }
+        });
+    });
+    return promise;
+}
+
+export function addTest(test: Test): Promise<Test> {
+    const promise = new Promise(resolve => {
+        gapi.client.status.test.add(test).execute(resp => {
             if (!resp.code) {
                 resolve(resp);
             }

@@ -3,11 +3,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {Router, Route, IndexRoute, useRouterHistory } from 'react-router';
+import {Router, Route, IndexRoute } from 'react-router';
 
-// https://github.com/reactjs/react-router/blob/master/upgrade-guides/v2.0.0.md#using-custom-histories
-import { createHashHistory } from 'history';
-const history = useRouterHistory(createHashHistory)({ queryKey: false });
+import history from './app-history';
 
 import App from './components/App';
 import AdminPage from './components/AdminPage';

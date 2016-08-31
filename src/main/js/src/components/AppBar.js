@@ -3,31 +3,51 @@
 import React, {Component} from 'react';
 
 import AppBar from 'material-ui/AppBar';
-import FlatButton from 'material-ui/FlatButton';
 import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import FontIcon from 'material-ui/FontIcon';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 
 type Props = {
     onAction(action: string): void;
 };
 
+// https://design.google.com/icons
+// http://www.material-ui.com/#/components/icon-button
+// http://www.material-ui.com/#/components/font-icon
 class MyAppBar extends Component<void, Props, void> {
     render() {
         const {onAction} = this.props;
         const menue = <div>
-            <FlatButton label="Edit" onClick={() => onAction('edit')}/>
-            <FlatButton label="Delete" onClick={() => onAction('delete')}/>
-            <IconMenu
-                iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
-                targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+            <IconButton
+                tooltip="Edit"
+                onClick={() => onAction('edit')}
             >
-                <MenuItem primaryText="Refresh" onClick={() => onAction('refresh')}/>
-                <MenuItem primaryText="Sign in" onClick={() => onAction('login')}/>
-            </IconMenu>
+                <FontIcon className="material-icons">create</FontIcon>
+            </IconButton>
+            <IconButton
+                tooltip="Add"
+                onClick={() => onAction('add')}
+            >
+                <FontIcon className="material-icons">add_circle_outline</FontIcon>
+            </IconButton>
+            <IconButton
+                tooltip="Delete"
+                onClick={() => onAction('delete')}
+            >
+                <FontIcon className="material-icons">delete</FontIcon>
+            </IconButton>
+            <IconButton
+                tooltip="Refresh"
+                onClick={() => onAction('refresh')}
+            >
+                <FontIcon className="material-icons">cached</FontIcon>
+            </IconButton>
+            <IconButton
+                tooltip="To Report"
+                onClick={() => onAction('to report')}
+            >
+                <FontIcon className="material-icons">description</FontIcon>
+            </IconButton>
         </div>;
 
         return <AppBar
