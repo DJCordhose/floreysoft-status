@@ -53,7 +53,7 @@ class AdminOverview extends Component<any, Props, void> {
                         enableSelectAll={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn colSpan="5" tooltip="All configured Tests" style={{textAlign: 'center'}}>
+                            <TableHeaderColumn colSpan="6" tooltip="All configured Tests" style={{textAlign: 'center'}}>
                                 Tests
                             </TableHeaderColumn>
                         </TableRow>

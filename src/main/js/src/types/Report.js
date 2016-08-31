@@ -4,6 +4,6 @@ export type Report = {
     id: number;
     name: string;
     description: string;
-    timestamp: number;
+    timestamp: string;
     status: number;
 };

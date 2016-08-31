@@ -4,6 +4,8 @@ import React, {Component} from 'react';
 import {List} from 'immutable';
 import type {Report} from '../types/Report';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import FontIcon from 'material-ui/FontIcon';
+import {yellow500, red500, green500} from 'material-ui/styles/colors';
 
 const styles = {
     table: {
@@ -36,14 +38,16 @@ class UserOverview extends Component<any, Props, void> {
                         enableSelectAll={false}
                     >
                         <TableRow>
-                            <TableHeaderColumn colSpan="5" tooltip="Current Reports" style={{textAlign: 'center'}}>
-                                Reports
+                            <TableHeaderColumn colSpan="4" tooltip="Current Reports" style={{textAlign: 'center'}}>
+                                Test-Reports
                             </TableHeaderColumn>
                         </TableRow>
                         <TableRow>
-                            <TableHeaderColumn tooltip="Select the test"></TableHeaderColumn>
                             <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="The Description">Description</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="What is the test about?">Description</TableHeaderColumn>
+                            <TableHeaderColumn
+                                tooltip="When was the test last executed?">Last Checked</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="What was the result of that test?">Status</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -53,12 +57,25 @@ class UserOverview extends Component<any, Props, void> {
                         stripedRows={true}
                     >
                         {reports.map(report => {
-                            const {id, name, description} = report;
+                            const {id, name, description, timestamp, status} = report;
+                            let statusSymbol;
+                            if (status === 'OK') {
+                                statusSymbol = <FontIcon className="material-icons"
+                                                         color={green500}>check_circle</FontIcon>;
+                            } else if (status === 'FAIL') {
+                                statusSymbol = <FontIcon className="material-icons"
+                                                         color={red500}>error</FontIcon>;
+                            } else {
+                                statusSymbol = <FontIcon className="material-icons"
+                                                         color={yellow500}>warning</FontIcon>;
+                            }
+                            const lastExecuted = new Date(Number.parseInt(timestamp, 10)).toString();
 
                             return <TableRow key={id}>
-                                <TableRowColumn></TableRowColumn>
                                 <TableRowColumn>{name}</TableRowColumn>
                                 <TableRowColumn>{description}</TableRowColumn>
+                                <TableRowColumn>{lastExecuted}</TableRowColumn>
+                                <TableRowColumn>{statusSymbol}</TableRowColumn>
                             </TableRow>;
                         })}
                     </TableBody>
