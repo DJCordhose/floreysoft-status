@@ -1,30 +1,30 @@
 package com.floreysoft.status;
 
 public class Test {
-    public int id;
+    public String id;
     public String name;
     public String description;
     public String url;
     public int interval;
-    public boolean disabled;
+    public boolean enabled;
 
     public Test() {
     }
 
-    public Test(int id, String name, String description, String url, int interval, boolean disabled) {
+    public Test(String id, String name, String description, String url, int interval, boolean enabled) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
         this.interval = interval;
-        this.disabled = disabled;
+        this.enabled = enabled;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -60,11 +60,11 @@ public class Test {
         this.interval = interval;
     }
 
-    public boolean isDisabled() {
-        return disabled;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

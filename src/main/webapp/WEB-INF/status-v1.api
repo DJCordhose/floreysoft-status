@@ -1,0 +1,249 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://floreysoft-status.appspot.com/_ah/api",
+  "name" : "status",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://floreysoft-status.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "status.testsApi.listCurrentReports" : {
+      "path" : "report",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.listCurrentReports",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.test.add" : {
+      "path" : "addTest",
+      "httpMethod" : "post",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.addTest",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.test.delete" : {
+      "path" : "test/{id}",
+      "httpMethod" : "delete",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.deleteTest",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.testsApi.listTests" : {
+      "path" : "test",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.listTests",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.testsApi.getTest" : {
+      "path" : "test/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.getTest",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "string",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "status.test.save" : {
+      "path" : "saveTest",
+      "httpMethod" : "put",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "clientIds" : [ "113969358901-6l9q3h2n3biumcimcld1g65vlunsei7b.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.floreysoft.status.TestsApi.saveTest",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Report" : {
+        "id" : "Report",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "status" : {
+            "$ref" : "Status"
+          }
+        }
+      },
+      "Status" : {
+        "id" : "Status",
+        "type" : "string",
+        "enum" : [ "OK", "FAIL", "SLOW" ]
+      },
+      "ReportCollection" : {
+        "id" : "ReportCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Report"
+            }
+          }
+        }
+      },
+      "Test" : {
+        "id" : "Test",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "name" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "url" : {
+            "type" : "string"
+          },
+          "interval" : {
+            "type" : "integer"
+          },
+          "enabled" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "TestCollection" : {
+        "id" : "TestCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Test"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.floreysoft.status.TestsApi.listCurrentReports" : {
+        "response" : {
+          "$ref" : "ReportCollection"
+        }
+      },
+      "com.floreysoft.status.TestsApi.addTest" : {
+        "request" : {
+          "$ref" : "Test"
+        },
+        "response" : {
+          "$ref" : "Test"
+        }
+      },
+      "com.floreysoft.status.TestsApi.deleteTest" : {
+        "response" : {
+          "$ref" : "Test"
+        }
+      },
+      "com.floreysoft.status.TestsApi.listTests" : {
+        "response" : {
+          "$ref" : "TestCollection"
+        }
+      },
+      "com.floreysoft.status.TestsApi.getTest" : {
+        "response" : {
+          "$ref" : "Test"
+        }
+      },
+      "com.floreysoft.status.TestsApi.saveTest" : {
+        "request" : {
+          "$ref" : "Test"
+        },
+        "response" : {
+          "$ref" : "Test"
+        }
+      }
+    }
+  }
+}
