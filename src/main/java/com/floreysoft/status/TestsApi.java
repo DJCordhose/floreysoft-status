@@ -31,6 +31,7 @@ public class TestsApi {
 		mockReports.add(new Report(3, "Test3", "Dritter Test", new Date().getTime(), Status.FAIL));
 	}
 
+	@ApiMethod(name = "test", httpMethod = "get")
 	public Test getTest(@Named("id") String id) throws NotFoundException {
 		try {
 			return new TestEntity(datastore.get(KeyFactory.stringToKey(id))).toTest();
@@ -39,6 +40,7 @@ public class TestsApi {
 		}
 	}
 
+	@ApiMethod(name = "tests", httpMethod = "get")
 	public List<Test> listTests() {
 		List<Test> tests = new ArrayList<Test>();
 		try {
@@ -52,6 +54,7 @@ public class TestsApi {
 		return tests;
 	}
 
+	@ApiMethod(name = "reports", httpMethod = "get")
 	public List<Report> listCurrentReports() {
 		return mockReports;
 	}
@@ -65,7 +68,7 @@ public class TestsApi {
 		} catch (ServletException e) {
 			logger.log(Level.SEVERE, "Failed to add test!", e);
 		}
-		return test;
+		return testEntity.toTest();
 	}
 
 	private void checkUser(User user) throws UnauthorizedException {
@@ -85,10 +88,11 @@ public class TestsApi {
 			TestEntity testEntity = new TestEntity(datastore.get(KeyFactory.stringToKey(test.getId())));
 			testEntity.update(test);
 			datastore.put(testEntity);
+			return testEntity.toTest();
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Failed to save test!", e);
+			return null;
 		}
-		this.deleteTest(user, test.id);
-		return this.addTest(user, test);
 	}
 
 	@ApiMethod(name = "test.delete", httpMethod = "delete")

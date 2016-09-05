@@ -4081,14 +4081,14 @@
   \************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["init"] = __webpack_require__(/*! -!./~/babel-loader?{"babelrc":false,"cacheDirectory":true,"presets":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2015/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2016/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-react/index.js"],"plugins":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-syntax-trailing-function-commas/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-class-properties/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-object-rest-spread/lib/index.js",["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-runtime/lib/index.js",{"helpers":false,"polyfill":false,"regenerator":true}]]}!./~/flowtype-loader!./~/eslint-loader!./src/api-init.js */ 38);
+	/* WEBPACK VAR INJECTION */(function(global) {module.exports = global["init"] = __webpack_require__(/*! -!./~/babel-loader?{"babelrc":false,"cacheDirectory":true,"presets":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2015/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2016/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-react/index.js"],"plugins":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-syntax-trailing-function-commas/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-class-properties/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-object-rest-spread/lib/index.js",["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-runtime/lib/index.js",{"helpers":false,"polyfill":false,"regenerator":true}]]}!./~/eslint-loader!./src/api-init.js */ 38);
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 38 */
-/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./~/babel-loader?{"babelrc":false,"cacheDirectory":true,"presets":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2015/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2016/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-react/index.js"],"plugins":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-syntax-trailing-function-commas/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-class-properties/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-object-rest-spread/lib/index.js",["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-runtime/lib/index.js",{"helpers":false,"polyfill":false,"regenerator":true}]]}!./~/flowtype-loader!./~/eslint-loader!./src/api-init.js ***!
-  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./~/babel-loader?{"babelrc":false,"cacheDirectory":true,"presets":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2015/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-es2016/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-preset-react/index.js"],"plugins":["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-syntax-trailing-function-commas/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-class-properties/lib/index.js","/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-object-rest-spread/lib/index.js",["/Users/olli/Development/floreysoft/floreysoft-status/src/main/js/~/babel-plugin-transform-runtime/lib/index.js",{"helpers":false,"polyfill":false,"regenerator":true}]]}!./~/eslint-loader!./src/api-init.js ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -37626,7 +37626,7 @@
 	    function AdminOverview() {
 	        _classCallCheck(this, AdminOverview);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(AdminOverview).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (AdminOverview.__proto__ || Object.getPrototypeOf(AdminOverview)).apply(this, arguments));
 	    }
 	
 	    _createClass(AdminOverview, [{
@@ -37706,7 +37706,7 @@
 	                            _react2.default.createElement(
 	                                _Table.TableHeaderColumn,
 	                                { tooltip: 'Is this Test active?' },
-	                                'Suspended'
+	                                'Enabled'
 	                            )
 	                        )
 	                    ),
@@ -37724,7 +37724,7 @@
 	                            var description = test.description;
 	                            var url = test.url;
 	                            var interval = test.interval;
-	                            var disabled = test.disabled;
+	                            var enabled = test.enabled;
 	                            var selected = test.selected;
 	
 	
@@ -37756,12 +37756,12 @@
 	                                    _Table.TableRowColumn,
 	                                    null,
 	                                    _react2.default.createElement(_Toggle2.default, {
-	                                        name: 'disabled',
+	                                        name: 'enabled',
 	                                        onToggle: function onToggle(e) {
-	                                            test.disabled = !disabled;
+	                                            test.enabled = !enabled;
 	                                            onSave(test);
 	                                        },
-	                                        toggled: disabled || false
+	                                        toggled: enabled || false
 	                                    })
 	                                )
 	                            );
@@ -53259,7 +53259,7 @@
 	
 	function loadTests() {
 	    var promise = new Promise(function (resolve) {
-	        gapi.client.status.tests.listTests().execute(function (resp) {
+	        gapi.client.status.tests().execute(function (resp) {
 	            if (!resp.code) {
 	                resp.items = resp.items || [];
 	                resolve(resp.items);
@@ -53306,7 +53306,7 @@
 	
 	function loadReports() {
 	    var promise = new Promise(function (resolve) {
-	        gapi.client.status.tests.listCurrentReports().execute(function (resp) {
+	        gapi.client.status.reports().execute(function (resp) {
 	            if (!resp.code) {
 	                resp.items = resp.items || [];
 	                resolve(resp.items);

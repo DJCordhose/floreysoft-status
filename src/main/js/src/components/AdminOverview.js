@@ -63,7 +63,7 @@ class AdminOverview extends Component<any, Props, void> {
                             <TableHeaderColumn tooltip="The Description">Description</TableHeaderColumn>
                             <TableHeaderColumn tooltip="The Description">URL</TableHeaderColumn>
                             <TableHeaderColumn tooltip="The Interval">Interval</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Is this Test active?">Suspended</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Is this Test active?">Enabled</TableHeaderColumn>
                         </TableRow>
                     </TableHeader>
                     <TableBody
@@ -73,7 +73,7 @@ class AdminOverview extends Component<any, Props, void> {
                         stripedRows={true}
                     >
                         {tests.map(test => {
-                            const {id, name, description, url, interval, disabled, selected} = test;
+                            const {id, name, description, url, interval, enabled, selected} = test;
 
                             return <TableRow key={id} selected={selected}>
                                 <TableRowColumn></TableRowColumn>
@@ -82,12 +82,12 @@ class AdminOverview extends Component<any, Props, void> {
                                 <TableRowColumn>{url}</TableRowColumn>
                                 <TableRowColumn>{interval}</TableRowColumn>
                                 <TableRowColumn><Toggle
-                                    name="disabled"
+                                    name="enabled"
                                     onToggle={(e) => {
-                                        test.disabled = !disabled;
+                                        test.enabled = !enabled;
                                         onSave(test);
                                     }}
-                                    toggled={disabled || false}
+                                    toggled={enabled || false}
                                 /></TableRowColumn>
                             </TableRow>;
                         })}

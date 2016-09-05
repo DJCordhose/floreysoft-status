@@ -69,11 +69,9 @@ public class TestEntity extends AbstractEntity {
 		setUrl(test.getUrl());
 		setInterval(test.getInterval());
 		setEnabled(test.isEnabled());
-		setName(test.getName());
-		setName(test.getName());
 	}
 	
 	public Test toTest() {
-		return new Test(KeyFactory.keyToString(getEntity().getKey()), getName(), getDescription(), getUrl(), getInterval(), !isEnabled());
+		return new Test(KeyFactory.keyToString(getEntity().getKey()), getName(), getDescription(), getUrl(), getInterval(), isEnabled());
 	}
 }
