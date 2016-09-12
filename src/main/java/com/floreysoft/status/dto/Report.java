@@ -1,7 +1,9 @@
-package com.floreysoft.status;
+package com.floreysoft.status.dto;
+
+import com.floreysoft.status.entity.Status;
 
 public class Report {
-    public int id;
+    public String id;
     public String name;
     public String description;
     public long timestamp;
@@ -10,7 +12,7 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, String name, String description, long timestamp, Status status) {
+    public Report(String id, String name, String description, long timestamp, Status status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,11 +20,11 @@ public class Report {
         this.status = status;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

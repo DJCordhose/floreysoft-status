@@ -1,7 +1,6 @@
 package com.floreysoft.status;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -9,6 +8,9 @@ import java.util.logging.Logger;
 import javax.inject.Named;
 import javax.servlet.ServletException;
 
+import com.floreysoft.status.dto.Report;
+import com.floreysoft.status.dto.Test;
+import com.floreysoft.status.entity.TestRunEntity;
 import com.floreysoft.status.entity.TestEntity;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -21,15 +23,9 @@ import com.google.appengine.api.users.User;
 
 @Api(name = "status", version = "v1", scopes = { Constants.EMAIL_SCOPE }, clientIds = { Constants.WEB_CLIENT_ID }, audiences = { Constants.ANDROID_AUDIENCE })
 public class TestsApi {
-	public static List<Report> mockReports = new ArrayList<Report>();
-	public static Datastore datastore = new Datastore();
 	private static final Logger logger = Logger.getLogger(TestsApi.class.getName());
-
-	static {
-		mockReports.add(new Report(1, "Test1", "Ein Test", new Date().getTime(), Status.OK));
-		mockReports.add(new Report(2, "Test2", "Zweiter Test", new Date().getTime(), Status.SLOW));
-		mockReports.add(new Report(3, "Test3", "Dritter Test", new Date().getTime(), Status.FAIL));
-	}
+	private Datastore datastore = new Datastore();
+	private TestService testService = new TestService();
 
 	@ApiMethod(name = "test", httpMethod = "get")
 	public Test getTest(@Named("id") String id) throws NotFoundException {
@@ -42,21 +38,12 @@ public class TestsApi {
 
 	@ApiMethod(name = "tests", httpMethod = "get")
 	public List<Test> listTests() {
-		List<Test> tests = new ArrayList<Test>();
-		try {
-			List<Entity> entities = datastore.query(new Query(TestEntity.KIND));
-			for (Entity entity : entities) {
-				tests.add(new TestEntity(entity).toTest());
-			}
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, "Failed to load tests!", e);
-		}
-		return tests;
+		return testService.listTests();
 	}
 
 	@ApiMethod(name = "reports", httpMethod = "get")
 	public List<Report> listCurrentReports() {
-		return mockReports;
+		return testService.listCurrentReports();
 	}
 
 	@ApiMethod(name = "test.add", httpMethod = "post")

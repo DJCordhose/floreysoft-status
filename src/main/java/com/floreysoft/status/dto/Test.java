@@ -1,4 +1,4 @@
-package com.floreysoft.status;
+package com.floreysoft.status.dto;
 
 public class Test {
     public String id;

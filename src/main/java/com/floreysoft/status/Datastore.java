@@ -187,12 +187,17 @@ public class Datastore {
 		}, DATASTORE_RETRY_COUNT);
 	}
 
-	public List<Entity> query(final Query query) throws Exception {
+	public List<Entity> query(final Query query, final FetchOptions options) throws Exception {
 		return retry(new RunnableWithResult<List<Entity>>() {
 			@Override
 			public List<Entity> run() throws Exception {
-				return datastore.prepare(query).asList(FetchOptions.Builder.withDefaults());
+				return datastore.prepare(query).asList(options);
 			}
 		}, DATASTORE_RETRY_COUNT);
 	}
+
+	public List<Entity> query(final Query query) throws Exception {
+		return query(query, FetchOptions.Builder.withDefaults());
+	}
+
 }

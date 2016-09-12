@@ -1,7 +1,8 @@
 package com.floreysoft.status.entity;
 
-import com.floreysoft.status.Test;
+import com.floreysoft.status.dto.Test;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 
 public class TestEntity extends AbstractEntity {
@@ -11,7 +12,8 @@ public class TestEntity extends AbstractEntity {
 	public static final String URL = "url";
 	public static final String INTERVAL = "interval";
 	public static final String ENABLED = "enabled";
-	
+	public static final String GOLDEN_MASTER = "gm";
+
 	public TestEntity(Entity entity) {
 		super(entity);
 	}
@@ -19,6 +21,14 @@ public class TestEntity extends AbstractEntity {
 	public TestEntity(Test test) {
 		this(new Entity(KIND));
 		update(test);
+	}
+
+	public void setGoldenMaster(String goldenMaster) {
+		entity.setProperty(GOLDEN_MASTER, goldenMaster);
+	}
+
+	public String getGoldenMaster() {
+		return (String)entity.getProperty(GOLDEN_MASTER);
 	}
 
 	public void setName(String name) {
@@ -46,7 +56,7 @@ public class TestEntity extends AbstractEntity {
 	}
 
 	public void setInterval(int interval) {
-		entity.setProperty(INTERVAL, interval);
+		entity.setProperty(INTERVAL, Long.valueOf(interval));
 	}
 
 	public int getInterval() {
@@ -61,6 +71,10 @@ public class TestEntity extends AbstractEntity {
 	public boolean isEnabled() {
 		Boolean enabled = (Boolean)entity.getProperty(ENABLED);
 		return enabled == null ? false: enabled;
+	}
+
+	public Key getKey() {
+		return getEntity().getKey();
 	}
 	
 	public void update(Test test) {
