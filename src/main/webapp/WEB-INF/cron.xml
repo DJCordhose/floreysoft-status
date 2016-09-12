@@ -5,4 +5,9 @@
         <description>Ping test run</description>
         <schedule>every 5 minutes</schedule>
     </cron>
+	<cron>
+		<url>/cleanu?kind=Report&amp;tohrs=240</url>
+		<description>Delete old timers</description>
+		<schedule>every day 00:00</schedule>
+	</cron>	    
 </cronentries>
