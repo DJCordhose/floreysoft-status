@@ -11,6 +11,10 @@
         <servlet-name>TaskServlet</servlet-name>
         <servlet-class>com.floreysoft.status.TaskServlet</servlet-class>
     </servlet>
+	<servlet>
+		<servlet-name>CleanupEntitiesServlet</servlet-name>
+		<servlet-class>com.floreysoft.status.CleanupEntitiesServlet</servlet-class>
+	</servlet>
     <servlet-mapping>
         <servlet-name>SystemServiceServlet</servlet-name>
         <url-pattern>/_ah/spi/*</url-pattern>
@@ -18,6 +22,10 @@
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
         <url-pattern>/cron/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CleanupEntitiesServlet</servlet-name>
+        <url-pattern>/cleanup</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
