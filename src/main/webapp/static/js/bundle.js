@@ -37361,7 +37361,7 @@
 	    function AdminPage(props) {
 	        _classCallCheck(this, AdminPage);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AdminPage).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (AdminPage.__proto__ || Object.getPrototypeOf(AdminPage)).call(this, props));
 	
 	        var test1 = {
 	            id: 1,
@@ -48812,7 +48812,7 @@
 	    function MyAppBar() {
 	        _classCallCheck(this, MyAppBar);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(MyAppBar).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (MyAppBar.__proto__ || Object.getPrototypeOf(MyAppBar)).apply(this, arguments));
 	    }
 	
 	    _createClass(MyAppBar, [{
@@ -50486,7 +50486,7 @@
 	    function TestDialog(props) {
 	        _classCallCheck(this, TestDialog);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(TestDialog).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (TestDialog.__proto__ || Object.getPrototypeOf(TestDialog)).call(this, props));
 	
 	        _this.state = props.test;
 	        return _this;
@@ -53259,7 +53259,7 @@
 	
 	function loadTests() {
 	    var promise = new Promise(function (resolve) {
-	        gapi.client.status.tests().execute(function (resp) {
+	        gapi.client.status.test.list().execute(function (resp) {
 	            if (!resp.code) {
 	                resp.items = resp.items || [];
 	                resolve(resp.items);
@@ -53306,7 +53306,7 @@
 	
 	function loadReports() {
 	    var promise = new Promise(function (resolve) {
-	        gapi.client.status.reports().execute(function (resp) {
+	        gapi.client.status.report.list().execute(function (resp) {
 	            if (!resp.code) {
 	                resp.items = resp.items || [];
 	                resolve(resp.items);
@@ -53388,7 +53388,7 @@
 	    function OverviewPage(props) {
 	        _classCallCheck(this, OverviewPage);
 	
-	        var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(OverviewPage).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (OverviewPage.__proto__ || Object.getPrototypeOf(OverviewPage)).call(this, props));
 	
 	        _this.state = {
 	            reports: (0, _immutable.List)() };
@@ -53485,7 +53485,7 @@
 	    function UserOverview() {
 	        _classCallCheck(this, UserOverview);
 	
-	        return _possibleConstructorReturn(this, Object.getPrototypeOf(UserOverview).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (UserOverview.__proto__ || Object.getPrototypeOf(UserOverview)).apply(this, arguments));
 	    }
 	
 	    _createClass(UserOverview, [{

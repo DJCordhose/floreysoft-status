@@ -2,8 +2,10 @@ package com.floreysoft.status;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +19,7 @@ import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.urlfetch.HTTPResponse;
 import com.google.appengine.api.urlfetch.URLFetchService;
 import com.google.appengine.api.urlfetch.URLFetchServiceFactory;
+import com.google.appengine.repackaged.org.joda.time.IllegalFieldValueException;
 
 public class TestService {
     private static final Logger logger = Logger.getLogger(TestService.class.getName());
@@ -33,20 +36,52 @@ public class TestService {
         }
     }
 
-    public Status executeSampleRun(TestEntity test) throws MalformedURLException, IOException {
+    public void setGoldenMaster(List<Test> tests) throws IOException {
+        for (Test test : tests) {
+            final TestEntity testEntity = new TestEntity(test);
+            if (testEntity.isEnabled()) {
+                final String url = testEntity.getUrl();
+                HTTPResponse response = urlFetchService.fetch(new URL(url));
+                byte[] content = response.getContent();
+                testEntity.setGoldenMaster(content);
+            }
+        }
+    }
+
+    // no side effects
+    private Status executeSampleRun(TestEntity test) {
         final String url = test.getUrl();
         logger.log(Level.INFO, "Running test against: " + url);
-        final String goldenMaster = test.getGoldenMaster();
-        if (goldenMaster == null || goldenMaster.length() == 0) {
+        final byte[] goldenMaster = test.getGoldenMaster();
+        if (goldenMaster == null || goldenMaster.length == 0) {
             logger.log(Level.WARNING, "Test not initialized for: " + url);
+            return Status.UNINITIALIZED;
+        }
+        long startTime = System.currentTimeMillis();
+        try {
             HTTPResponse response = urlFetchService.fetch(new URL(url));
             byte[] content = response.getContent();
-            test.setGoldenMaster(content);
-            // FIXME: commented out for testing only
-//            return Status.UNINITIALIZED;
+            if (!Arrays.equals(content, goldenMaster)) {
+                return Status.FAIL;
+            }
+        } catch (SocketTimeoutException ste) {
+            return Status.TIMED_OUT;
+        } catch (MalformedURLException e) {
+            return Status.INVALID;
+        } catch (IOException e) {
+            return Status.INVALID;
         }
-        // FIXME: should call url and compare to golden master to create status
+        long endTime = System.currentTimeMillis();
+        long duration = endTime - startTime;
+        if (isSlow(test, duration)) {
+            return Status.SLOW;
+        }
         return Status.OK;
+    }
+
+    private boolean isSlow(TestEntity test, long durationinMs) {
+        // FIXME: should check against median of all samples
+        return false;
     }
 
     public List<Test> listTests() {

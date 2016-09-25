@@ -20,7 +20,7 @@ export function navigateToRoot() {
 
 export function loadTests(): Promise<Array<Test>> {
     const promise = new Promise(resolve => {
-        gapi.client.status.tests().execute(resp => {
+        gapi.client.status.test.list().execute(resp => {
             if (!resp.code) {
                 resp.items = resp.items || [];
                 resolve(resp.items);
@@ -67,7 +67,7 @@ export function deleteTest(test: Test): Promise<Test> {
 
 export function loadReports(): Promise<Array<Report>> {
     const promise = new Promise(resolve => {
-        gapi.client.status.reports().execute(resp => {
+        gapi.client.status.report.list().execute(resp => {
             if (!resp.code) {
                 resp.items = resp.items || [];
                 resolve(resp.items);

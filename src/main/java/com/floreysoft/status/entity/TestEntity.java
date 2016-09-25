@@ -23,12 +23,12 @@ public class TestEntity extends AbstractEntity {
 		update(test);
 	}
 
-	public void setGoldenMaster(String goldenMaster) {
+	public void setGoldenMaster(byte[] goldenMaster) {
 		entity.setProperty(GOLDEN_MASTER, goldenMaster);
 	}
 
-	public String getGoldenMaster() {
-		return (String)entity.getProperty(GOLDEN_MASTER);
+	public byte[] getGoldenMaster() {
+		return (byte[])entity.getProperty(GOLDEN_MASTER);
 	}
 
 	public void setName(String name) {

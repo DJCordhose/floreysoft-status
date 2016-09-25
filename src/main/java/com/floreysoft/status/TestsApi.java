@@ -1,5 +1,6 @@
 package com.floreysoft.status;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,14 +37,23 @@ public class TestsApi {
 		}
 	}
 
-	@ApiMethod(name = "tests", httpMethod = "get")
+	@ApiMethod(name = "test.list", httpMethod = "get")
 	public List<Test> listTests() {
 		return testService.listTests();
 	}
 
-	@ApiMethod(name = "reports", httpMethod = "get")
+	@ApiMethod(name = "report.list", httpMethod = "get")
 	public List<Report> listCurrentReports() {
 		return testService.listCurrentReports();
+	}
+
+	// https://cloud.google.com/appengine/docs/java/endpoints/parameter-and-return-types
+	@ApiMethod(name = "test.sample", httpMethod = "post")
+	public void sampleTests(User user, @Named("tests") List<String> testKeys) throws UnauthorizedException, IOException {
+		checkUser(user);
+		// TODO: need to find tests for those keys
+//		List<Test> tests = testService.testForKey();
+//		testService.setGoldenMaster(tests);
 	}
 
 	@ApiMethod(name = "test.add", httpMethod = "post")
