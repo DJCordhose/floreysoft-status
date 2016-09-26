@@ -13,7 +13,8 @@ module.exports = {
   parser: 'babel-eslint',
 
   // import plugin is termporarily disabled, scroll below to see why
-  plugins: [/*'import', */'flowtype', 'jsx-a11y', 'react'],
+  plugins: [/*'import', */'flowtype', 'jsx-a11y', 'react', "flowtype-errors"],
+  // plugins: [/*'import', */'flowtype', 'jsx-a11y', 'react'],
 
   env: {
     browser: true,
@@ -46,6 +47,8 @@ module.exports = {
   },
 
   rules: {
+    // https://github.com/amilajack/eslint-plugin-flowtype-errors
+    "flowtype-errors/show-errors": 2,
     // http://eslint.org/docs/rules/
     'array-callback-return': 'warn',
     'default-case': ['warn', { commentPattern: '^no default$' }],

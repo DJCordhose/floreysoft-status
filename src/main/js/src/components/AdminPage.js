@@ -34,14 +34,14 @@ class AdminPage extends Component<any, any, State> {
     constructor(props: any) {
         super(props);
         const test1 = {
-            id: 1,
+            id: '1',
             name: 'Test1',
             interval: 5,
             description: 'Noch ein Test',
             url: 'url1'
         };
         const test2 = {
-            id: 2,
+            id: '2',
             name: 'Test2',
             interval: 5,
             description: 'Noch ein Test 2',
@@ -62,13 +62,16 @@ class AdminPage extends Component<any, any, State> {
     loadTests() {
         loadTests().then((tests: Array<Test>) => {
             this.setState({
-                tests: List(tests).sort((t1: Test, t2: Test) => t1.id - t2.id) // eslint-disable-line new-cap
+                tests: List(tests).sort( // eslint-disable-line new-cap
+                    (t1: Test, t2: Test) =>
+                        t1.id === t2.id ? 0 :
+                            (t1.id > t2.id ? 1 : -1))
             });
 
         })
     }
 
-    openTestById(id: number) {
+    openTestById(id: string) {
         const testEntry = this.findTestEntryForId(id);
         if (testEntry) {
             const test = testEntry[1];
@@ -82,7 +85,7 @@ class AdminPage extends Component<any, any, State> {
 
     openNewTest() {
         const test: Test = {
-            id: -1,
+            id: '-1',
             name: '',
             interval: -1,
             description: '',
@@ -94,7 +97,7 @@ class AdminPage extends Component<any, any, State> {
         });
     }
 
-    findTestEntryForId(id: number): ?[number, Test] {
+    findTestEntryForId(id: string): ?[number, Test] {
         // https://facebook.github.io/immutable-js/docs/#/List/findEntry
         return this.state.tests.findEntry(test => test.id === id);
     }
@@ -127,7 +130,7 @@ class AdminPage extends Component<any, any, State> {
                 this.openTestById(firstSelectedTest.id);
             }
         } else if (action === 'add') {
-                this.openNewTest();
+            this.openNewTest();
         } else if (action === 'delete') {
             const firstSelectedTest = tests.find(test => test.selected);
             if (firstSelectedTest) {
